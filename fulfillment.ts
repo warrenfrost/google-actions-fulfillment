@@ -75,6 +75,7 @@ app.onSync(async (body, headers) => {
   console.log("SYNC");
   console.log("Request : " + JSON.stringify(body));
   var result = getSyncResponse();
+  result.requestId = body.requestId;
   console.log("Response : " + JSON.stringify(result));
   return result;
 });
@@ -84,6 +85,7 @@ app.onQuery(async (body, headers) => {
     console.log("QUERY");
     console.log("Request : " + JSON.stringify(body));
     var result = getQueryResponse();
+    result.requestId = body.requestId;
     console.log("Response : " + JSON.stringify(result));
     return result;
   });
@@ -97,6 +99,7 @@ app.onExecute(async (body, headers) => {
   var device = {on: ledState, online: true};
   queryResponse.payload.devices["1"] = device;
   var result = getExecuteResponse();
+  result.requestId = body.requestId;
   console.log("Response : " + JSON.stringify(result));
   return result;
 });
